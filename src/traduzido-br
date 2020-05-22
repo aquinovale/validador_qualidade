@@ -1,0 +1,68 @@
+O coeficiente de correlação de Pearsons (r) é uma medida de correlação linear entre duas variáveis. Seu valor está entre -1 e +1, -1 indicando correlação linear negativa total, 0 indicando nenhuma correlação linear e 1 indicando correlação linear positiva total. Além disso, r é invariável sob mudanças separadas na localização e na escala das duas variáveis, implicando que, para uma função linear, o ângulo do eixo x não afeta r.
+Para calcular r para duas variáveis ​​X e Y, divide-se a covariância de X e Y pelo produto de seus desvios padrão.
+O coeficiente de correlação de Spearmans (ρ) é uma medida da correlação monotônica entre duas variáveis ​​e, portanto, é melhor para capturar correlações monotônicas não lineares do que Pearsons r. Seu valor está entre -1 e +1, -1 indicando correlação monotônica negativa total, 0 indicando ausência de correlação monotônica e 1 indicando correlação monotônica positiva total.
+Para calcular ρ para duas variáveis ​​X e Y, divide-se a covariância das variáveis ​​de classificação de X e Y pelo produto de seus desvios padrão.
+Da mesma forma que o coeficiente de correlação de Spearmans, o coeficiente de correlação de Kendall (τ) mede a associação ordinal entre duas variáveis. Seu valor está entre -1 e +1, -1 indicando correlação total negativa, 0 indicando nenhuma correlação e 1 indicando total correlação positiva.
+Para calcular τ para duas variáveis ​​X e Y, determina-se o número de pares de observações concordantes e discordantes. τ é dado pelo número de pares concordantes menos os pares discordantes divididos pelo número total de pares.
+Phik (φk) é um novo e prático coeficiente de correlação que funciona consistentemente entre variáveis ​​categóricas, ordinais e de intervalo, captura dependência não linear e reverte para o coeficiente de correlação de Pearson no caso de uma distribuição de entrada normal bivariada. Há extensa documentação disponível aqui.
+Cramérs V é uma medida de associação para variáveis ​​aleatórias nominais. O coeficiente varia de 0 a 1, com 0 indicando independência e 1 indicando associação perfeita. Os estimadores empíricos usados ​​para o Cramérs V demonstraram ser tendenciosos, mesmo para amostras grandes. Usamos uma medida corrigida pelo viés que foi proposta por Bergsma em 2013 e que pode ser encontrada aqui.
+está altamente correlacionado com
+outros campos
+valores ausentes
+é distribuído uniformemente
+é um tipo não suportado, verifique se precisa de limpeza ou análise adicional
+Visão geral
+Variáveis
+Interações
+Correlações
+Valores ausentes
+Amostra
+Reprodução
+Análise
+iniciado
+acabado
+Duração
+Versão
+Linha de comando
+Download da configuração
+Advertências
+Número de variáveis
+Número de observações
+Células ausentes
+Linhas duplicadas
+Tamanho total na memória
+Tamanho médio do registro na memória
+Estatísticas quantílicas
+Estatísticas descritivas
+Contagem distinta
+Único
+Ausência de
+Infinito
+Significado
+Mínimo
+Máximo
+Tamanho da memória
+Alternar detalhes
+Valor
+Contagem
+Frequência
+Valores comuns
+Valores extremos
+Estatisticas
+Histograma
+Comprimento máximo
+Comprimento mediano
+Comprimento médio
+Comprimento mínimo
+comprimento
+Categórico
+Número real
+Não suportado
+Alternar descrições de correlação
+ÚNICO
+UNIFORME
+ALTA_CORRELAÇÃO
+AUSÊNCIA DE
+e
+tem
+valores

@@ -1,0 +1,68 @@
+The Pearsons correlation coefficient (r) is a measure of linear correlation between two variables. Its value lies between -1 and +1, -1 indicating total negative linear correlation, 0 indicating no linear correlation and 1 indicating total positive linear correlation. Furthermore, r is invariant under separate changes in location and scale of the two variables, implying that for a linear function the angle to the x-axis does not affect r.
+To calculate r for two variables X and Y, one divides the covariance of X and Y by the product of their standard deviations.
+The Spearmans rank correlation coefficient (ρ) is a measure of monotonic correlation between two variables, and is therefore better in catching nonlinear monotonic correlations than Pearsons r. Its value lies between -1 and +1, -1 indicating total negative monotonic correlation, 0 indicating no monotonic correlation and 1 indicating total positive monotonic correlation.
+To calculate ρ for two variables X and Y, one divides the covariance of the rank variables of X and Y by the product of their standard deviations.
+Similarly to Spearmans rank correlation coefficient, the Kendall rank correlation coefficient (τ) measures ordinal association between two variables. Its value lies between -1 and +1, -1 indicating total negative correlation, 0 indicating no correlation and 1 indicating total positive correlation.
+To calculate τ for two variables X and Y, one determines the number of concordant and discordant pairs of observations. τ is given by the number of concordant pairs minus the discordant pairs divided by the total number of pairs.
+Phik (φk) is a new and practical correlation coefficient that works consistently between categorical, ordinal and interval variables, captures non-linear dependency and reverts to the Pearson correlation coefficient in case of a bivariate normal input distribution. There is extensive documentation available here.
+Cramérs V is an association measure for nominal random variables. The coefficient ranges from 0 to 1, with 0 indicating independence and 1 indicating perfect association. The empirical estimators used for Cramérs V have been proved to be biased, even for large samples. We use a bias-corrected measure that has been proposed by Bergsma in 2013 that can be found here.
+is highly correlated with
+other fields
+missing values
+is uniformly distributed
+is an unsupported type, check if it needs cleaning or further analysis
+Overview
+Variables
+Interactions
+Correlations
+Missing values
+Sample
+Reproduction
+Analysis
+started
+finished
+Duration
+Version
+Command line
+Download configuration
+Warnings
+Number of variables
+Number of observations
+Missing cells
+Duplicate rows
+Total size in memory
+Average record size in memory
+Quantile statistics
+Descriptive statistics
+Distinct count
+Unique
+Missing
+Infinite
+Mean
+Minimum
+Maximum
+Memory size
+Toggle details
+Value
+Count
+Frequency
+Common values
+Extreme values
+Statistics
+Histogram
+Length
+Max length
+Median length
+Mean length
+Min length
+Categorical
+Real number
+Unsupported
+Toggle correlation descriptions
+UNIQUE
+UNIFORM
+HIGH_CORRELATION
+MISSING
+and
+has
+values
