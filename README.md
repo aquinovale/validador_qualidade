@@ -103,8 +103,10 @@ warns.log
       14      3    154      3      14 move_files_csv@152-165@./start.py
       10      9    124      3      10 verify_file_to_move@167-176@./start.py
        4      1     35      0       4 main@179-182@./start.py
+
 4 file analyzed.
 ==============================================================
+
 NLOC    Avg.NLOC  AvgCCN  Avg.token  function_cnt    file
 --------------------------------------------------------------
      41       5.3     2.1       38.4         7     ./metadata.py
