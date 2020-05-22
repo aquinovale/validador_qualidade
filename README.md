@@ -43,25 +43,29 @@ Formatação:
 ## Arquivos gerados pelo validador
 
 nome_arquivo_warns.log
+
 	O arquivo de *_warns.logs mostra as informações sobre o que foi encontrado no arquivo e as verificações feitas. Serve de auxilio para identificação do que está errado e os possíveis problemas no arquivo.
 
 
 nome_arquivo_warns_fields.log
+
 	O arquivo *_fields.logs mostra as informações a respeito dos campos obrigatórios, se foram ou não encontrados. Serve para ajudar o usuário a identificar se o arquivo apresenta o mínimo necessário para ser ingerido.
 
 
 nome_arquivo_metadata.schema
+
 	O arquivo .schema possui os campos e possíveis tipos identificados no arquivo. Serve para ajudar o usuário a preencher os dados necessários para cadastro do layout.
 
+
 warns.log
+
 	O arquivo warns.log trás informações gerais sobre a execução de todos os arquivos validados. Serve para apoio do administrador.
  
 
 
 
-## 
+## Complexidade Ciclomatica
 
-================================================
   NLOC    CCN   token  PARAM  length  location  
 ------------------------------------------------
        3      1     35      1       3 get_head@15-17@./metadata.py
