@@ -19,7 +19,7 @@ date_format = '%d/%m/%Y %H:%M:%S'
 # get_in = Diretório de onde os dados estão
 # df = DataFrame do dado lido
 # run = Se é para rodar ou não o profiling
-def create_profiling(get_in, df, run = False):
+def create_profiling(get_in, df, run = False, json = False):
     if run:
         directory = os.path.dirname(get_in) + '/'
         filename = os.path.splitext(os.path.basename(get_in))    
@@ -29,7 +29,7 @@ def create_profiling(get_in, df, run = False):
         profile.set_variable("html.style.logo", meta.get_logo())
         profile.set_variable("html.inline", False)
         profile.set_variable("html.style.theme", 'flatly')
-        profile.to_file(output_file=new_file)
+        profile.to_file(output_file=new_file + '' if json else '.json')
         translate_language(new_file)
 
 # Faz a tradução do html gerado de ingles para portugues

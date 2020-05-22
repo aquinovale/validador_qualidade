@@ -60,10 +60,10 @@ def analyze_and_fix_line(get_in, warn, headline):
                     lastline = fix_line(warn, i, line, lastline, headline)
                     if not (analize_line(warn, i, lastline, headline, log = False)):
                         meta.write_logs(warn, 'INFO', 'Correção das linhas', 'Tentativa de correção das linhas, descritas acima.')
-                        fix_file.write(lastline.replace('"', '') + '\n')  
+                        fix_file.write(lastline.replace('"', '').strip() + '\n')  
                         lastline = ''
                 else:
-                    fix_file.write(line.replace('"', ''))
+                    fix_file.write(line.replace('"', '').strip())
                 i += 1
 
 
@@ -101,7 +101,3 @@ def fix_line(warn, i, line, lastline, headline):
         else:
             return (lastline + line).replace('\n', '')
     return line
-
-
-
-

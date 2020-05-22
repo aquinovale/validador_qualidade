@@ -11,12 +11,14 @@ import datetime
 import utils as csv
 import fixfile as fix
 import metadata as meta
+import send_mail as email
 import pandas_access as mdb
 
 # Inicia o Validador
 # get_in = Diretório onde os arquivos estão
 def start(get_in):
     configuration = os.path.dirname(get_in + '/') + '/config.cfg'
+    
     with open(configuration,'r') as configs:   
         for cfg in configs:
             read_files(get_in, cfg)
@@ -54,6 +56,8 @@ def execute_steps(get_in, cfg, filename = ''):
         elif type == 'location':   
             meta.write_logs(warn, 'INFO', 'Configuração de localização encontrada','Config - ' + cfg)
             move_files_csv(warn, get_in, cfg.split(';')[0].split(':')[1])
+            meta.write_logs(warn, 'INFO', 'Enviando emails para usuários cadastrados','Config - ' + cfg)
+            email.send_email(os.environ['EMAIL_SENDER'], cfg.split(';')[1], os.environ['EMAIL_PASSWORD'])
         else:
             type = ''
 
