@@ -11,9 +11,9 @@ import fixfile as fix
 import pandas_profiling
 import metadata as meta   
 import pandas_access as mdb
+import urllib.parse as unquote_plus
 
 date_format = '%d/%m/%Y %H:%M:%S'
-
 
 # Cria o profiling dos dados para qualidade
 # get_in = Diretório de onde os dados estão

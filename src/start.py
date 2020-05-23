@@ -57,7 +57,7 @@ def execute_steps(get_in, cfg, filename = ''):
             meta.write_logs(warn, 'INFO', 'Configuração de localização encontrada','Config - ' + cfg)
             move_files_csv(warn, get_in, cfg.split(';')[0].split(':')[1])
             meta.write_logs(warn, 'INFO', 'Enviando emails para usuários cadastrados','Config - ' + cfg)
-            email.send_email(os.environ['EMAIL_SENDER'], cfg.split(';')[1], os.environ['EMAIL_PASSWORD'])
+            email.send_email(os.getenv("EMAIL_SENDER"), cfg.split(';')[1], os.getenv("EMAIL_PASSWORD"))
         else:
             type = ''
 
@@ -97,6 +97,7 @@ def convert_type_to_csv(get_in, sheets = [], positional = [], columns_name = [])
         with open(log,'a') as warn:   
             meta.write_logs(warn, 'ERROR', 'Leitura de dados','Arquivo não encontrado.')
     prepare_convert(log, file_type, directory, get_out, filename, get_in, positional, columns_name, sheets)
+    return directory + get_out + '.csv'
 
 def prepare_convert(log, file_type, directory, get_out, filename, get_in, positional, columns_name, sheets):
     with open(log,'a') as warn:                        
