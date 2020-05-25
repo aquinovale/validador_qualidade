@@ -14,6 +14,11 @@ Basta chamar o start.py diretorio/
 
 Ex: python3.7 start.py /home/vinicius/git/validador-qualidade/
 
+## Lambda - Event S3
+
+O validador também pode ser usado através de evento no S3 que dispara uma chamada no Lambda para execução da validação. Os arquivos criados, são enviados para outro bucket que está configurado diretamente no código, devendo ser alterado caso seja desejado outro bucket. 
+
+Os arquivos de log e schema também são colocados juntamente com o novo arquivo gerado pela validação.
 
 ## Arquivo config.cfg
 
