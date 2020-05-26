@@ -17,11 +17,11 @@ BLOCKSIZE = 1024*1024
 def get_head(get_in):  
     special_chars = re.escape(string.punctuation.replace('|', '').replace(';', '').replace('_', ''))
     with open(get_in, 'r') as f:
-        line = f.readline().replace('\r\n', '').replace('\n', '')
+        line = f.readline().replace('\r\n', '').replace('\n', '').lower()
         delimiter = detect_delimiter(line)
         regex = '\\' + delimiter + '[0-9]+'
         clean_line = unidecode(re.sub('[' + special_chars + ']', '', line)).replace('\'','').replace('_', '').replace(' ', '_')
-        return re.sub(regex, delimiter, clean_line)
+        return re.sub(regex, delimiter, clean_line.lower)
 
 # Retorna a chave SHA256 do arquivo analisado.
 # get_in = Diretório de onde está o arquivo para ser ingerido
