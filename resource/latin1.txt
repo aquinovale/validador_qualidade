@@ -1,11 +1,8 @@
-CustomerID;FirstName;LastName;CompanyName;Address;City;State;PostalCode;Country;Email;WebSite;Phone;NumEmployees;DiscountRate;CustomerSince;CreditLimit;IsActive;Notes
-1;"Richard;teste";Rost;Access Learning Zone;PO Box 101;Amherst;NY;14226;;richard.rost@amicron.com#mailto:richard.rost@amicron.com#;www.accesslearningzone.com#http://www.accesslearningzone.com#;7165557777;2;0.5;01/01/12 00:00:00;2000.0000;1;Rick is a swell guy
+customerid;firstname;lastname;companyname;address;city;state;postalcode;country;email;website;phone;numemployees;discountrate;customersince;creditlimit;isactive;notes
 2;Joe;Smith;XYZ Corp;101 Main St;Buffalo;NY;14220;;;;7165553434;500;0.1;03/01/90 00:00:00;500.0000;1;
 3;Suzan;Jones;123 Packing;101 Main St;Long Beach;CA;90802;;suzan@amicron.com;;5624365146;25;0.1;01/02/98 00:00:00;1500.0000;0;
 4;Alan;Watson;Forestry Services;202a South Park Ave;Toledo;OH;43614;;alan@yahoo.com;;4193895477;16;0.0;02/01/94 00:00:00;1000.0000;1;NET30
-5;Anna;Picore;Pharmacom;1020 Middle Street #2;Houston;TX;77007;;anna@amicron.com;;7132364479;3500;0.0;09/08/02 00:00:00;1700.0000;1;"Birthday 10/31/71
-8/1/01: talked about her new computer
-8/3/01: gave her help"
+5;Anna;Picore;Pharmacom;1020 Middle Street #2;Houston;TX;77007;;anna@amicron.com;;7132364479;3500;0.0;09/08/02 00:00:00;1700.0000;1;Birthday 10/31/71
 6;Ronald;Simms;LMNOP Wholesale;14 Homer Ave;Edmonton;AB;;Canada;ronald@lmnop.net;;7807465468;30;0.0;04/03/92 00:00:00;50.0000;1;Please ship UPS
 7;Donald;Barker;GamerSkum Inc.;1010 Yonge St;;ON;M1T 1R;Canada;;;4164415555;900;0.0;03/01/98 00:00:00;250.0000;1;Big Rush fan
 8;Benny;Sperduti;Euro Real Estate Inc.;Via Appia 85;Rome;;00122;Italy;;;7167267262;10;0.2;04/06/99 00:00:00;1600.0000;0;

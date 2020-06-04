@@ -15,17 +15,20 @@ def required_fields(get_in, fields_required = []):
     log = os.path.dirname(get_in) + '/' + os.path.splitext(os.path.basename(get_in))[0].replace('_temp', '') + '_warns_fields.log'
     with open(log,'a+') as warn: 
         result = False
-        if fields_required != [] and fields_required != ['']:
-            heads = meta.get_head(get_in)
-            meta.write_logs(warn, 'INFO', 'Campos obrigatórios' ,'Campos obrigatórios definidos - ' + ','.join(fields_required))
-            for field in fields_required:
-                if field in heads:
-                    meta.write_logs(warn, 'INFO', 'Campo obrigatório encontrado' ,'Campo obrigatório - ' + field)
-                    result = True
-                else:    
-                    meta.write_logs(warn, 'ERROR', 'Campo obrigatório não encontrado' ,'Campo obrigatório - ' + field)
-                    result = False
-            meta.write_logs(warn, 'INFO', 'Campos obrigatórios' ,'Busca por campos obrigatórios finalizado.')                    
+        try:
+            if fields_required != [] and fields_required != ['']:
+                heads = meta.get_head(get_in)
+                meta.write_logs(warn, 'INFO', 'Campos obrigatórios' ,'Campos obrigatórios definidos - ' + ','.join(fields_required))
+                for field in fields_required:
+                    if meta.clean_metadata(';' + field) in heads:
+                        meta.write_logs(warn, 'INFO', 'Campo obrigatório encontrado' ,'Campo obrigatório - ' + field)
+                        result = True
+                    else:    
+                        meta.write_logs(warn, 'ERROR', 'Campo obrigatório não encontrado' ,'Campo obrigatório - ' + field)
+                        result = False
+                meta.write_logs(warn, 'INFO', 'Campos obrigatórios' ,'Busca por campos obrigatórios finalizado.')                    
+        except:                
+            meta.write_logs(warn, 'ERROR', 'Campos obrigatórios' ,'Falha ao identificar campos obrigatórios.')                                
     return result            
 
 # Abre o arquivo e faz a busca por problemas na linha

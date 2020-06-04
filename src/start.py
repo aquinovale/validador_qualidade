@@ -18,7 +18,6 @@ import pandas_access as mdb
 # get_in = Diretório onde os arquivos estão
 def start(get_in):
     configuration = os.path.dirname(get_in + '/') + '/config.cfg'
-    
     with open(configuration,'r') as configs:   
         for cfg in configs:
             read_files(get_in, cfg)
@@ -57,7 +56,10 @@ def execute_steps(get_in, cfg, filename = ''):
             meta.write_logs(warn, 'INFO', 'Configuração de localização encontrada','Config - ' + cfg)
             move_files_csv(warn, get_in, cfg.split(';')[0].split(':')[1])
             meta.write_logs(warn, 'INFO', 'Enviando emails para usuários cadastrados','Config - ' + cfg)
-            email.send_email(os.getenv("EMAIL_SENDER"), cfg.split(';')[1], os.getenv("EMAIL_PASSWORD"))
+            try:
+                email.send_email(os.getenv("EMAIL_SENDER"), cfg.split(';')[1], os.getenv("EMAIL_PASSWORD"))
+            except:
+                meta.write_logs(warn, 'ERROR', 'Falha ao enviar email','Config - ' + cfg)    
         else:
             type = ''
 
@@ -182,9 +184,9 @@ def verify_file_to_move(get_in, warn, location_raw):
 
 
 def main():
-    print('Iniciando processo de validação dos arquivos, saída no diretório' + sys.argv[1] )
+    print('Iniciando processo de validação dos arquivos, saída no diretório:' + sys.argv[1] )
     start(sys.argv[1])
-    print('Processo finalizado nos arquivos do diretório ' + sys.argv[1])
+    print('Processo finalizado nos arquivos do diretório:' + sys.argv[1])
 
 if __name__ == "__main__":
     main()

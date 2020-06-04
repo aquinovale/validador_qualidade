@@ -26,10 +26,10 @@ def create_profiling(get_in, df, run = False, json = False):
         profile = df.profile_report(title=filename[0],plot={'histogram': {'bayesian_blocks_bins': False,
                                                 'bins': 10}})
         profile.set_variable("html.style.logo", meta.get_logo())
-        profile.set_variable("html.inline", False)
+        #profile.set_variable("html.inline", False)
         profile.set_variable("html.style.theme", 'flatly')
-        profile.to_file(output_file=new_file + '' if json else '.json')
-        translate_language(new_file)
+        profile.to_file(output_file=new_file + '' if not json else '.json')
+        #translate_language(new_file)
 
 # Faz a tradução do html gerado de ingles para portugues
 # get_in = Diretório de onde os dados estão
@@ -88,7 +88,12 @@ def txt_to_csv(get_in, get_out, delimiter, columns_name = []):
         df = identify_datatypes(get_in, delimiter, meta.get_dtype(df.dtypes))        
         df.to_csv(get_out, encoding='utf-8', index = False, header = True, sep = ';', date_format = date_format)  
         fix.required_fields(get_out, read_required_fields(get_in))
-        create_profiling(get_out, df, True)
+        try:            
+            create_profiling(get_out, df, True)
+        except:
+            log = os.path.dirname(get_in) + '/' + os.path.splitext(os.path.basename(get_in))[0] + '_warns.log'
+            with open(log,'a+') as warn: 
+                meta.write_logs(warn, 'ERROR','Montagem de profiling', 'Erro ao montar profiling.')
     else:        
         positional_to_csv(get_in, get_out, delimiter, columns_name)    
 
