@@ -14,6 +14,8 @@ import metadata as meta
 import send_mail as email
 import pandas_access as mdb
 
+DEBUG=True
+
 # Inicia o Validador
 # get_in = Diretório onde os arquivos estão
 def start(get_in):
@@ -90,33 +92,37 @@ def type_txt(type, cfg, warn, filename, get_in, sheets, positional, columns_name
 def convert_type_to_csv(get_in, sheets = [], positional = [], columns_name = []):
     try:
         directory = os.path.dirname(get_in) + '/'
-        m = magic.Magic()
-        file_type = m.from_file(get_in)
         filename = os.path.splitext(os.path.basename(get_in))    
         get_out = filename[0]    
         log = directory + get_out + '_warns.log'
+        m = magic.Magic(mime=True)
+        file_type = m.from_file(get_in)
     except:
         with open(log,'a') as warn:   
-            meta.write_logs(warn, 'ERROR', 'Leitura de dados','Arquivo não encontrado.')
+            meta.write_logs(warn, 'ERROR', 'convert_type_to_csv - Leitura de dados','Arquivo não encontrado.')
     prepare_convert(log, file_type, directory, get_out, filename, get_in, positional, columns_name, sheets)
     return directory + get_out + '.csv'
 
 def prepare_convert(log, file_type, directory, get_out, filename, get_in, positional, columns_name, sheets):
-    with open(log,'a') as warn:                        
+    with open(log,'a+') as warn:                        
         meta.write_logs(warn, 'INFO', 'Analisando dados ','Iniciando o processo.')
         try:
             if (file_type == 'text/plain'):   
+                meta.write_logs(warn, 'DEBUG', 'prepare_convert','Arquivo texto', debug=DEBUG)
                 txt_to_csv(directory, get_out, filename, get_in, warn, file_type, positional, columns_name)
             elif (file_type in ['application/zip', 'application/octet-stream', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']):
+                meta.write_logs(warn, 'DEBUG', 'prepare_convert','Arquivo excel', debug=DEBUG)
                 xls_to_csv(directory, get_out, warn, file_type, sheets, get_in)
             elif (file_type == 'application/x-msaccess'):
+                meta.write_logs(warn, 'DEBUG', 'prepare_convert','Arquivo Access', debug=DEBUG)
                 accdb_to_csv(directory, get_out, warn, file_type, get_in)
             else:
                 meta.write_logs(warn, 'ERROR', 'file_type ' + file_type, 'Tipo não encontrado, verifique se é um arquivo válido')         
         except:
-            meta.write_logs(warn, 'ERROR', 'Falha ao exporta arquivo ' + file_type,'erro de leitura do arquivo')
+            meta.write_logs(warn, 'ERROR', 'prepare_convert - Falha ao preparar arquivo ' + file_type,'erro de leitura do arquivo')
 
 def accdb_to_csv(directory, get_out, warn, file_type, get_in):
+    meta.write_logs(warn, 'DEBUG', 'accdb_to_csv','Iniciando processo', debug=DEBUG)
     get_out = directory + get_out
     meta.write_logs(warn, 'INFO', 'Arquivo encontrado ' + file_type, 'Formato Micrsoft Access (mdb,accdb).')
     for table in mdb.list_tables(get_in):
@@ -125,9 +131,11 @@ def accdb_to_csv(directory, get_out, warn, file_type, get_in):
             csv.access_to_csv(get_in, get_out, table)                    
             meta.write_logs(warn, 'INFO', 'Chave ùnica criada ' + get_out + '_' + table + '.csv','SHA256(' + meta.md5_hash(get_out + '_temp_' + table + '.csv') + ')')
         except:
-            meta.write_logs(warn, 'ERROR','Falha ao exportar tabela ' + table, 'Erro de leitura na tabela')
+            meta.write_logs(warn, 'ERROR','accdb_to_csv - Falha ao exportar tabela ' + table, 'Erro de leitura na tabela')
+    meta.write_logs(warn, 'DEBUG', 'accdb_to_csv','Finalizando processo', debug=DEBUG)            
 
 def xls_to_csv(directory, get_out, warn, file_type, sheets, get_in):
+    meta.write_logs(warn, 'DEBUG', 'xls_to_csv','Iniciando processo', debug=DEBUG)
     get_out = directory + get_out 
     meta.write_logs(warn, 'INFO', 'Arquivo encontrado ' + file_type,'Formato Micrsoft Excel (xls,xlsx).')            
     try:
@@ -141,20 +149,24 @@ def xls_to_csv(directory, get_out, warn, file_type, sheets, get_in):
             csv.excel_to_csv(get_in, get_out)
             meta.write_logs(warn, 'INFO', 'Chave ùnica criada ' + get_out + '.csv','SHA256(' + meta.md5_hash(get_out + '.csv') + ')')
     except:
-        meta.write_logs(warn, 'ERROR','Falha ao exportar sheet ' + sheet, 'Erro de leitura do excel.')
+        meta.write_logs(warn, 'ERROR','xls_to_csv - Falha ao exportar sheet ' + sheet, 'Erro de leitura do excel.')
+    meta.write_logs(warn, 'DEBUG', 'xls_to_csv','Finalizando processo', debug=DEBUG)
 
 def txt_to_csv(directory, get_out, filename, get_in, warn, file_type, positional, columns_name):
+    meta.write_logs(warn, 'DEBUG', 'txt_to_csv','Iniciando processo', debug=DEBUG)
     get_out = directory + get_out + '.csv'                
     if(filename[1] =='.csv'):
         os.rename(get_in, get_in.replace('csv', 'txt'))
         get_in = get_in.replace('csv', 'txt')
-    meta.write_logs(warn, 'INFO', 'Arquivo encontrado' + file_type,'Formato texto plano (txt,csv,tsv).')
+    meta.write_logs(warn, 'INFO', 'Arquivo encontrado ' + file_type,'Formato texto plano (txt,csv,tsv).')
     if positional != []:
         meta.write_logs(warn, 'INFO', 'Arquivo posicional encontrado','Padrão ' + str(positional) + '.') 
+        for i in range(0, len(positional)): 
+            positional[i] = int(positional[i]) 
     meta.write_logs(warn, 'INFO', 'Remoção caracteres especiais','Quebras de linha e delimitador em local incorreto.')                                
-    csv.txt_to_csv(get_in, get_out, meta.detect_delimiter(meta.get_head(get_in), positional), columns_name)                
+    csv.txt_to_csv(get_in, get_out, meta.detect_delimiter(meta.get_head(get_in), positional=positional), columns_name)                
     meta.write_logs(warn, 'INFO','Chave criada ' + get_out, 'SHA256(' +meta. md5_hash(get_out) + ')')
-
+    meta.write_logs(warn, 'DEBUG', 'txt_to_csv','Finalizando processo', debug=DEBUG)
 
 def move_files_csv(warn, get_in, s3_location):
     s3_location = s3_location + '/'

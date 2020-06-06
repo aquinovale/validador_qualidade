@@ -20,11 +20,14 @@ def get_head(get_in):
         return clean_metadata(line)
 
 def clean_metadata(line):
-    delimiter = detect_delimiter(line) 
-    regex = '\\' + delimiter + '[0-9]+'
-    special_chars = re.escape(string.punctuation.replace('|', '').replace(';', '').replace('_', ''))
-    line_clean = unidecode(re.sub('[' + special_chars + ']', '', line)).replace('\'','').replace(' ', '_').lower()
-    return re.sub(regex, delimiter, line_clean)
+    try:
+        delimiter = detect_delimiter(line) 
+        regex = '\\' + delimiter + '[0-9]+'
+        special_chars = re.escape(string.punctuation.replace('|', '').replace(';', '').replace('_', ''))
+        line_clean = unidecode(re.sub('[' + special_chars + ']', '', line)).replace('\'','').replace(' ', '_').lower()
+        return re.sub(regex, delimiter, line_clean)
+    except:
+        return line    
 
 # Retorna a chave SHA256 do arquivo analisado.
 # get_in = Diretório de onde está o arquivo para ser ingerido
@@ -45,7 +48,8 @@ def detect_delimiter(line, positional = []):
         PATTERN = '([;|\t|\\|])'  # define os possiveis delimitadores
         return (re.search(PATTERN, line)).group() if positional == [] else positional
     except:
-        return positional
+        #return positional
+        return ''
 
 # Identifica os tipos dos dados
 # dtypes = Tipagem vinda do DataFrame
@@ -74,9 +78,12 @@ def write_metadata(dtypes, metadata):
 # tipo_erro = Tipo do erro
 # erro = Exceção do erro
 # msg = Msg de erro encontrado
-def write_logs(warn, tipo_erro, erro, msg):    
+def write_logs(warn, tipo_erro, erro, msg, debug = False):    
     delimiter = ':'
-    warn.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + tipo_erro + delimiter + erro + delimiter + msg + '\n')
+    if debug:
+        warn.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' DEBUG' + delimiter + erro + delimiter + msg + '\n')
+    else:
+        warn.write(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' ' + tipo_erro + delimiter + erro + delimiter + msg + '\n')
 
 
 def get_logo():

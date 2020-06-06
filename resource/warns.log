@@ -1,0 +1,56 @@
+2020-06-05 22:14:26 INFO:Formato de data encontrado para o arquivo latin1.txt:date_format = %d/%m/%Y %H:%M:%S
+2020-06-05 22:14:26 INFO:Configuração texto encontrada, arquivo latin1.txt:Config - text:latin1.txt;FirstNadme,Country;%d/%m/%Y %H:%M:%S
+2020-06-05 22:14:26 INFO:Analisando linhas do arquivo latin1.txt:Analisando e corrigindo quebras de linhas e caracteres especiais.
+2020-06-05 22:14:26 INFO:Formato de data encontrado para o arquivo posicional.txt:date_format = %d/%m/%Y
+2020-06-05 22:14:26 INFO:Configuração posicional encontrada, arquivo posicional.txt:Config - positional:posicional.txt:14,13,3:data,nome,valor;%d/%m/%Y
+2020-06-05 22:14:26 INFO:Formato de data encontrado para o arquivo excel.xlsx:date_format = %d/%m/%Y %H:%M:%S
+2020-06-05 22:14:26 INFO:Configuração excel encontrada, arquivo excel.xlsx:Config - excel:excel.xlsx:tabela_a,tabela_b;;%d/%m/%Y %H:%M:%S
+2020-06-05 22:14:26 INFO:Configuração Access encontrada, arquivo access.accdb:Config - access:access.accdb,access2.mdb;
+2020-06-05 22:14:26 INFO:Configuração Access encontrada, arquivo access2.mdb:Config - access:access.accdb,access2.mdb;
+2020-06-05 22:14:27 INFO:Configuração de localização encontrada:Config - location:/home/vinicius/git/validador-qualidade/output;%d/%m/%Y %H:%M:%S
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access2_temp_Publishers.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_warns.log para /home/vinicius/git/validador-qualidade/output/access2_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/posicional_warns.log para /home/vinicius/git/validador-qualidade/output/posicional_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/excel_tabela_a.csv para /home/vinicius/git/validador-qualidade/output/excel_tabela_a.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access_CustomerT_warns_fields.log para /home/vinicius/git/validador-qualidade/output/access_CustomerT_warns_fields.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/excel_warns.log para /home/vinicius/git/validador-qualidade/output/excel_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/excel_tabela_b_metadata.schema para /home/vinicius/git/validador-qualidade/output/excel_tabela_b_metadata.schema.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/posicional_temp.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/excel_tabela_b_warns_fields.log para /home/vinicius/git/validador-qualidade/output/excel_tabela_b_warns_fields.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Publishers.csv para /home/vinicius/git/validador-qualidade/output/access2_Publishers.csv.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/excel_temp_tabela_a_warns.log.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access2_temp_Titles_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/latin1_metadata.schema para /home/vinicius/git/validador-qualidade/output/latin1_metadata.schema.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/excel_temp_tabela_b.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/excel_tabela_b.csv para /home/vinicius/git/validador-qualidade/output/excel_tabela_b.csv.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access2_temp_Authors_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Titles.csv para /home/vinicius/git/validador-qualidade/output/access2_Titles.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access_CustomerT_metadata.schema para /home/vinicius/git/validador-qualidade/output/access_CustomerT_metadata.schema.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Authors_metadata.schema para /home/vinicius/git/validador-qualidade/output/access2_Authors_metadata.schema.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Authors.csv para /home/vinicius/git/validador-qualidade/output/access2_Authors.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Publishers_metadata.schema para /home/vinicius/git/validador-qualidade/output/access2_Publishers_metadata.schema.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Authors_warns_fields.log para /home/vinicius/git/validador-qualidade/output/access2_Authors_warns_fields.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/excel_tabela_a_metadata.schema para /home/vinicius/git/validador-qualidade/output/excel_tabela_a_metadata.schema.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/posicional_metadata.schema para /home/vinicius/git/validador-qualidade/output/posicional_metadata.schema.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Titles_warns_fields.log para /home/vinicius/git/validador-qualidade/output/access2_Titles_warns_fields.log.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access2_temp_Publishers_warns.log.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/excel_temp_tabela_b_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/latin1_warns.log para /home/vinicius/git/validador-qualidade/output/latin1_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Titles_metadata.schema para /home/vinicius/git/validador-qualidade/output/access2_Titles_metadata.schema.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access_temp_CustomerT_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/posicional.csv para /home/vinicius/git/validador-qualidade/output/posicional.csv.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/posicional_temp_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/latin1.txt.original para /home/vinicius/git/validador-qualidade/output/latin1.txt.original.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access_temp_CustomerT.csv.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/excel_temp_tabela_a.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/posicional_warns_fields.log para /home/vinicius/git/validador-qualidade/output/posicional_warns_fields.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/latin1_warns_fields.log para /home/vinicius/git/validador-qualidade/output/latin1_warns_fields.log.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access2_temp_Authors.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/latin1.csv para /home/vinicius/git/validador-qualidade/output/latin1.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access_warns.log para /home/vinicius/git/validador-qualidade/output/access_warns.log.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access_CustomerT.csv para /home/vinicius/git/validador-qualidade/output/access_CustomerT.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/excel_tabela_a_warns_fields.log para /home/vinicius/git/validador-qualidade/output/excel_tabela_a_warns_fields.log.
+2020-06-05 22:14:27 WARN:Arquivo temporário removido:Arquivo removido /home/vinicius/git/validador-qualidade/resource/access2_temp_Titles.csv.
+2020-06-05 22:14:27 INFO:Movimentação de arquivos:Arquivo movido de /home/vinicius/git/validador-qualidade/resource/access2_Publishers_warns_fields.log para /home/vinicius/git/validador-qualidade/output/access2_Publishers_warns_fields.log.
+2020-06-05 22:14:27 INFO:Enviando emails para usuários cadastrados:Config - location:/home/vinicius/git/validador-qualidade/output;%d/%m/%Y %H:%M:%S
+2020-06-05 22:14:28 ERROR:Falha ao enviar email:Config - location:/home/vinicius/git/validador-qualidade/output;%d/%m/%Y %H:%M:%S

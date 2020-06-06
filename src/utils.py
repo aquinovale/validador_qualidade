@@ -28,7 +28,7 @@ def create_profiling(get_in, df, run = False, json = False):
         profile.set_variable("html.style.logo", meta.get_logo())
         #profile.set_variable("html.inline", False)
         profile.set_variable("html.style.theme", 'flatly')
-        profile.to_file(output_file=new_file + '' if not json else '.json')
+        #profile.to_file(output_file=new_file + '' if not json else '.json')
         #translate_language(new_file)
 
 # Faz a tradução do html gerado de ingles para portugues
@@ -93,7 +93,7 @@ def txt_to_csv(get_in, get_out, delimiter, columns_name = []):
         except:
             log = os.path.dirname(get_in) + '/' + os.path.splitext(os.path.basename(get_in))[0] + '_warns.log'
             with open(log,'a+') as warn: 
-                meta.write_logs(warn, 'ERROR','Montagem de profiling', 'Erro ao montar profiling.')
+                meta.write_logs(warn, 'ERROR','txt_to_csv - Montagem de profiling', 'Erro ao montar profiling.')
     else:        
         positional_to_csv(get_in, get_out, delimiter, columns_name)    
 
@@ -103,9 +103,7 @@ def txt_to_csv(get_in, get_out, delimiter, columns_name = []):
 # positional = Recebe as posições do arquivo posicional
 # columns_name = Lista com nome das colunas que são usadas pelo posicional
 def positional_to_csv(get_in, get_out, positional = [], columns_name = []):
-    get_old = os.path.dirname(get_out) + '/' + os.path.splitext(os.path.basename(get_in))[0]
-    for i in range(0, len(positional)): 
-        positional[i] = int(positional[i]) 
+    get_old = os.path.dirname(get_out) + '/' + os.path.splitext(os.path.basename(get_in))[0]    
     df = pd.read_fwf(get_in , widths = positional, names = columns_name, encoding ='utf-8')
     df.to_csv(get_old + '_temp.csv', encoding = 'utf-8', index = False, header = True, sep = ';', date_format = date_format)  
     txt_to_csv(get_old + '_temp.csv', get_out, ';')
@@ -117,6 +115,7 @@ def positional_to_csv(get_in, get_out, positional = [], columns_name = []):
 # table = nome da tabela a ser convertida 
 def access_to_csv(get_in, get_out, table):
     df = mdb.read_table(get_in, table)
+    df.columns = [ meta.clean_metadata(x.lower()) for x in df.columns]  
     df.to_csv(get_out + '_temp_' + table + '.csv', date_format=date_format, encoding='utf-8', index = False, header = True, sep = ';')
     txt_to_csv(get_out + '_temp_' + table + '.csv', get_out + '_' + table + '.csv', ';')
 
@@ -133,5 +132,6 @@ def excel_to_csv(get_in, get_out, sheet = ''):
     else:
         df = pd.read_excel(get_in).replace('\r?\n', ' ', regex = True).replace(';', ' ', regex = True)                
         sheet = '_temp.csv'
+    df.columns = [ meta.clean_metadata(x.lower()) for x in df.columns]  
     df.to_csv(get_out + sheet, encoding='utf-8', date_format=date_format, index = False, header = True, sep = ';')
     txt_to_csv(get_out + sheet, get_out + original + '.csv', ';')
