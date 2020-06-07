@@ -28,7 +28,7 @@ def create_profiling(get_in, df, run = False, json = False):
         profile.set_variable("html.style.logo", meta.get_logo())
         #profile.set_variable("html.inline", False)
         profile.set_variable("html.style.theme", 'flatly')
-        #profile.to_file(output_file=new_file + '' if not json else '.json')
+        profile.to_file(output_file=new_file + '' if not json else '.json')
         #translate_language(new_file)
 
 # Faz a tradução do html gerado de ingles para portugues
@@ -37,9 +37,9 @@ def translate_language(get_in):
     html = ''
     with open(get_in, 'r') as html_en:
         html = html_en.read()
-        with open('/home/vinicius/Downloads/python/traduzido-en', 'r') as en:
+        with open('traduzido-en', 'r') as en:
             traduzido_en = en.read().split('\n')
-        with open('/home/vinicius/Downloads/python/traduzido-br', 'r') as br:
+        with open('traduzido-br', 'r') as br:
             traduzido_br = br.read().split('\n')
         for i in range(0, len(traduzido_br)):
             html = html.replace(traduzido_en[i], traduzido_br[i])

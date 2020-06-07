@@ -5,7 +5,7 @@
 # Traduz de English para Português
 #########################################################################################################
 
-import os'
+import os
 import boto3
 import start 
 import urllib.parse as unquote_plus
@@ -32,7 +32,7 @@ def download_file(event, context, location):
 
 
 def upload_file(bucket, key, upload_path):
-    for r, _, files in os.walk(upload_path, topdown=False):
+    for _, _, files in os.walk(upload_path, topdown=False):
         for f in files:
-            if ('.csv' in f or '.schema' in f or '_warns' in f):
-                s3_client.upload_file(os.path.join(upload_path, f), bucket, f)
+            if ('.csv' in f or '.schema' in f or '_warns' in f or '.html' in f):
+                s3_client.upload_file(os.path.join(upload_path, f), bucket + '-raw', f)

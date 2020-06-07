@@ -6,6 +6,10 @@ O sistema identifica os cabeçalhos automaticamente, reconhece possiveis tipos e
 
 No final do processo os dados são enviados para um diretório especificado, e envia email avisando aos responsáveis.
 
+## Docker
+
+O arquivo DockerFile possui toda a informação necessária para executar validador
+
 
 ## Rodar o validador
 

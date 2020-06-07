@@ -58,10 +58,10 @@ def execute_steps(get_in, cfg, filename = ''):
             meta.write_logs(warn, 'INFO', 'Configuração de localização encontrada','Config - ' + cfg)
             move_files_csv(warn, get_in, cfg.split(';')[0].split(':')[1])
             meta.write_logs(warn, 'INFO', 'Enviando emails para usuários cadastrados','Config - ' + cfg)
-            try:
-                email.send_email(os.getenv("EMAIL_SENDER"), cfg.split(';')[1], os.getenv("EMAIL_PASSWORD"))
-            except:
-                meta.write_logs(warn, 'ERROR', 'Falha ao enviar email','Config - ' + cfg)    
+            #try:
+            #    email.send_email(os.getenv("EMAIL_SENDER"), cfg.split(';')[1], os.getenv("EMAIL_PASSWORD"))
+            #except:
+            #    meta.write_logs(warn, 'ERROR', 'Falha ao enviar email','Config - ' + cfg)    
         else:
             type = ''
 
@@ -171,12 +171,12 @@ def txt_to_csv(directory, get_out, filename, get_in, warn, file_type, positional
 def move_files_csv(warn, get_in, s3_location):
     s3_location = s3_location + '/'
     try:
-        now = datetime.datetime.now()
+        #now = datetime.datetime.now()
         location_raw = s3_location.replace(' ', '')
-        for tutorial in ['cadastro', 'faturamento', 'sinistro']:
-            location_root = os.path.join(s3_location, tutorial).replace(' ', '')
-            location = os.path.join(location_root, os.path.join(os.path.join('year=' + str(now.year)), 'month=' + str(now.month))).replace(' ', '')
-            os.makedirs(location, exist_ok=True)
+        #for tutorial in ['cadastro', 'faturamento', 'sinistro']:
+        #    location_root = os.path.join(s3_location, tutorial).replace(' ', '')
+        #    location = os.path.join(location_root, os.path.join(os.path.join('year=' + str(now.year)), 'month=' + str(now.month))).replace(' ', '')
+        #    os.makedirs(location, exist_ok=True)
         verify_file_to_move(get_in, warn, location_raw)
         return location_raw + '/warns.log'
     except:
@@ -186,7 +186,7 @@ def move_files_csv(warn, get_in, s3_location):
 def verify_file_to_move(get_in, warn, location_raw):
     for r, _, files in os.walk(get_in, topdown=False):
         for f in files:
-            if ('.csv' in f or '.schema' in f or '_warns' in f or '.original' in f) and r == get_in:
+            if ('.csv' in f or '.schema' in f or '_warns' in f or '.original' in f or '.html' in f) and r == get_in:
                 if '_temp' in f: # or ('.txt' in f and '.original' not in f):
                     meta.write_logs(warn, 'WARN', 'Arquivo temporário removido', 'Arquivo removido ' + get_in + f + '.')
                     os.remove(get_in + f)                            
