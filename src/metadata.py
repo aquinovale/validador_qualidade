@@ -16,15 +16,14 @@ BLOCKSIZE = 1024*1024
 # get_in = Diretório de onde está o arquivo para ser ingerido
 def get_head(get_in):  
     with open(get_in, 'r') as f:
-        line = f.readline().replace('\r\n', '').replace('\n', '').lower()
-        return clean_metadata(line)
+        return clean_metadata(f.readline())
 
 def clean_metadata(line):
     try:
         delimiter = detect_delimiter(line) 
         regex = '\\' + delimiter + '[0-9]+'
         special_chars = re.escape(string.punctuation.replace('|', '').replace(';', '').replace('_', ''))
-        line_clean = unidecode(re.sub('[' + special_chars + ']', '', line)).replace('\'','').replace(' ', '_').lower()
+        line_clean = unidecode(re.sub('[' + special_chars + ']', '', line)).replace('\'','').replace(' ', '_').replace('\r\n', '').replace('\n', '').lower()
         return re.sub(regex, delimiter, line_clean)
     except:
         return line    
@@ -53,24 +52,18 @@ def detect_delimiter(line, positional = []):
 
 # Identifica os tipos dos dados
 # dtypes = Tipagem vinda do DataFrame
-def get_dtype(dtypes):
-    line = ''
-    lines = []
-    odd = False
-    for dtype in dtypes.to_string().split():
-        line = line + ':' + dtype if line != '' else dtype
-        if odd:
-            lines.append(line)        
-            line = ''
-        odd = not odd
-    return lines
+def get_dtype(df):
+    lista = []
+    for column in df.columns:
+        lista.append(column + ':' + str(df[column].dtype))
+    return lista
 
 # Escreve as informações do metadata do dado
 # dtypes = Tipagem vinda do DataFrame
 # metadata = Local onde será gravado as informações sobre o metadado
-def write_metadata(dtypes, metadata):
+def write_metadata(df, metadata):
     with open(metadata,'w') as meta:                        
-        for campo in get_dtype(dtypes):
+        for campo in get_dtype(df):
             meta.write(campo + '\n')
 
 # Escreve as informações do metadata do dado

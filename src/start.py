@@ -7,6 +7,7 @@
 import os
 import sys
 import magic
+import click
 import datetime
 import utils as csv
 import fixfile as fix
@@ -57,7 +58,7 @@ def execute_steps(get_in, cfg, filename = ''):
         elif type == 'location':   
             meta.write_logs(warn, 'INFO', 'Configuração de localização encontrada','Config - ' + cfg)
             move_files_csv(warn, get_in, cfg.split(';')[0].split(':')[1])
-            meta.write_logs(warn, 'INFO', 'Enviando emails para usuários cadastrados','Config - ' + cfg)
+            #meta.write_logs(warn, 'INFO', 'Enviando emails para usuários cadastrados','Config - ' + cfg)
             #try:
             #    email.send_email(os.getenv("EMAIL_SENDER"), cfg.split(';')[1], os.getenv("EMAIL_PASSWORD"))
             #except:
@@ -78,6 +79,8 @@ def type_excel(warn, filename, cfg, get_in, sheets, positional, columns_name):
     convert_type_to_csv(os.path.join(get_in, filename), sheets=sheets, positional=positional, columns_name=columns_name)
 
 def type_txt(type, cfg, warn, filename, get_in, sheets, positional, columns_name):
+    meta.write_logs(warn, 'INFO', 'Encoding UTF-8','Convertendo arquivo para UTF-8.')
+    csv.convert_utf8(get_in + filename)
     if (type == 'positional'):
         positional = cfg.split(';')[0].split(':')[2].split(',')
         columns_name = cfg.split(';')[0].split(':')[3].split(',')
@@ -194,11 +197,20 @@ def verify_file_to_move(get_in, warn, location_raw):
                     meta.write_logs(warn, 'INFO', 'Movimentação de arquivos', 'Arquivo movido de ' + get_in + f + ' para ' + location_raw + f + '.')
                     os.rename(get_in + f, location_raw + f)
 
+@click.command()
+@click.option('--input', default='')
+@click.option('--output', default='')
+def main(input, output):
+    print('Iniciando processo de validação dos arquivos, saída no diretório:' + input) 
+    directory = os.path.dirname(input) + '/'
+    filename = os.path.splitext(os.path.basename(input))    
+    log = directory + filename[0] + '_warns.log'
 
-def main():
-    print('Iniciando processo de validação dos arquivos, saída no diretório:' + sys.argv[1] )
-    start(sys.argv[1])
-    print('Processo finalizado nos arquivos do diretório:' + sys.argv[1])
+    with open(log,'a+') as warn:  
+        convert_type_to_csv(input)
+        verify_file_to_move(input, warn, output)
+        
+    print('Processo finalizado arquivo direcionado para o diretório:' + output) 
 
 if __name__ == "__main__":
     main()

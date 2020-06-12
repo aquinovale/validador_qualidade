@@ -6,6 +6,7 @@
 #########################################################################################################
 
 import os
+import chardet
 import pandas as pd
 import fixfile as fix
 import pandas_profiling
@@ -13,6 +14,18 @@ import metadata as meta
 import pandas_access as mdb
 
 date_format = '%d/%m/%Y %H:%M:%S'
+
+def convert_utf8(get_in):
+    print('Convertendo para UTF-8')
+    with open(get_in, 'rb') as iso:
+        with open(get_in + '.utf', 'wb') as utf:
+            while(True):
+                data = iso.read(meta.BLOCKSIZE)
+                if not data : break
+                encoding = chardet.detect(data)['encoding'].lower()
+                utf.write(data.decode(encoding).encode('utf8'))
+    os.rename(get_in, get_in + '.raw')
+    os.rename(get_in + '.utf', get_in)
 
 # Cria o profiling dos dados para qualidade
 # get_in = Diretório de onde os dados estão
@@ -23,12 +36,13 @@ def create_profiling(get_in, df, run = False, json = False):
         directory = os.path.dirname(get_in) + '/'
         filename = os.path.splitext(os.path.basename(get_in))    
         new_file = directory + filename[0] + '_en.html'
-        profile = df.profile_report(title=filename[0],plot={'histogram': {'bayesian_blocks_bins': False,
-                                                'bins': 10}})
+        profile = df.profile_report(title=filename[0],minimal=True)
+        #profile = df.profile_report(title=filename[0],plot={'histogram': {'bayesian_blocks_bins': False,
+        #                                        'bins': 10}})
         profile.set_variable("html.style.logo", meta.get_logo())
         #profile.set_variable("html.inline", False)
         profile.set_variable("html.style.theme", 'flatly')
-        profile.to_file(output_file=new_file + '' if not json else '.json')
+        profile.to_file(output_file=new_file if not json else new_file + '.json')
         #translate_language(new_file)
 
 # Faz a tradução do html gerado de ingles para portugues
@@ -74,7 +88,7 @@ def identify_datatypes(get_in, delimiter, columns = []):
                 meta.write_logs(warn, 'INFO','Campo data encontrado ' + col_name, 'Campo datetime encontrado -' + col_name + ' ' + col_dtype)
                 column.append(col_name)
         df = pd.read_csv(get_in , sep=delimiter, encoding='utf-8', infer_datetime_format = True, parse_dates = column).replace('\r?\n', ' ', regex=True).replace(delimiter, ' ', regex=True)
-    meta.write_metadata(df.dtypes, os.path.dirname(get_in) + '/' + os.path.splitext(os.path.basename(get_in))[0].replace('_temp', '') + '_metadata.schema')    
+    meta.write_metadata(df, os.path.dirname(get_in) + '/' + os.path.splitext(os.path.basename(get_in))[0].replace('_temp', '') + '_metadata.schema')    
     return df
 
 # Converte o texto para csv
@@ -85,15 +99,18 @@ def identify_datatypes(get_in, delimiter, columns = []):
 def txt_to_csv(get_in, get_out, delimiter, columns_name = []):
     if columns_name == []:
         df = pd.read_csv(get_in, sep=delimiter, encoding='utf-8', infer_datetime_format = True, parse_dates = meta.get_head(get_in).split(delimiter)).replace('\r?\n', ' ', regex=True).replace(delimiter, ' ', regex=True)
-        df = identify_datatypes(get_in, delimiter, meta.get_dtype(df.dtypes))        
+        for column in df.columns:
+            if df[column].count() == 0:
+                df[column] = df[column].astype('object')
+        df = identify_datatypes(get_in, delimiter, meta.get_dtype(df))        
         df.to_csv(get_out, encoding='utf-8', index = False, header = True, sep = ';', date_format = date_format)  
         fix.required_fields(get_out, read_required_fields(get_in))
-        try:            
-            create_profiling(get_out, df, True)
-        except:
-            log = os.path.dirname(get_in) + '/' + os.path.splitext(os.path.basename(get_in))[0] + '_warns.log'
-            with open(log,'a+') as warn: 
-                meta.write_logs(warn, 'ERROR','txt_to_csv - Montagem de profiling', 'Erro ao montar profiling.')
+       # try:            
+        create_profiling(get_out, df, True)
+        #except:
+        #    log = os.path.dirname(get_in) + '/' + os.path.splitext(os.path.basename(get_in))[0] + '_warns.log'
+        #    with open(log,'a+') as warn: 
+        #        meta.write_logs(warn, 'ERROR','txt_to_csv - Montagem de profiling', 'Erro ao montar profiling.')
     else:        
         positional_to_csv(get_in, get_out, delimiter, columns_name)    
 
